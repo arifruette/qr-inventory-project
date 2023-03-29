@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/Scanner">
+
+    <fragment
+        android:id="@+id/Scanner"
+        android:name="com.example.myapplication.ScannerFragment"
+        android:label="Scanner"
+        tools:layout="@layout/fragment_scanner" />
+    <fragment
+        android:id="@+id/listOfItems"
+        android:name="com.example.myapplication.ItemsFragment"
+        android:label="Items"
+        tools:layout="@layout/fragment_items" />
+    <fragment
+        android:id="@+id/Locations"
+        android:name="com.example.myapplication.LocationsFragment"
+        android:label="Locations"
+        tools:layout="@layout/fragment_locations" />
+</navigation>

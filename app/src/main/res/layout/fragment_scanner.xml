@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/Scanner_Fragment"
+    tools:context=".ScannerFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textContent"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/msg_content"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+<!--    android:layout_above="@+id/textFormat"-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textFormat"-->
+<!--        android:layout_width="190dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_above="@+id/scanBtn"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_gravity="center"-->
+
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:text="@string/msg_format"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="24sp" />-->
+
+    <Button
+        android:id="@+id/scanBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="150dp"
+        android:backgroundTint="@color/colorButton"
+        android:text="@string/scanBtn" />
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/colorButton"
+        android:text="@string/addObjManually" />
+
+</RelativeLayout>

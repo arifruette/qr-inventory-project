@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/Scanner"
+        android:title="@string/Scanner"
+        />
+    <item android:id="@+id/listOfItems"
+        android:title="@string/listOfItems"
+        />
+    <item android:id="@+id/Locations"
+        android:title="@string/Locations"
+        />
+
+</menu>

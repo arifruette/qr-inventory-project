@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ItemsFragment">
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:text="@string/listOfItems"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="@color/black"/>-->
+
+    <TextView
+        android:id="@+id/itemsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listViewLayout"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:text="@string/fragment_items_title"
+        android:textColor="@color/forTitle"
+        android:textSize="24sp"
+        />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/loadingProgressBarItems"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/itemsTitle"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="170dp"
+        android:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/listViewLayout"
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</RelativeLayout>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Qr-Inventarization</string>
+    <string name="Scanner">Сканнер</string>
+    <string name="listOfItems">Список предметов</string>
+    <string name="Locations">Локации</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="scanBtn">Сканировать</string>
+    <string name="msg_content">messageContent</string>
+    <string name="msg_format">messageFormat</string>
+    <string name="fragment_items_title">Список объектов</string>
+    <string name="locationsTitle">Локации</string>
+    <string name="startInventarization">Запустить инвентаризацию</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="addObjManually">Добавить объект вручную</string>
+    <string name="nameHint">Название объекта</string>
+    <string name="serial_numberHint">Инвентарный номер</string>
+    <string name="placeHint">Расположение</string>
+    <string name="addObj">Добавить объект</string>
+    <string name="inventProcess">Процесс инвентаризации</string>
+    <string name="inventarization_process_btn">Отсканировать</string>
+</resources>
