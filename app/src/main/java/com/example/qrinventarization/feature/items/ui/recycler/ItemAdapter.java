@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qrinventarization.databinding.ItemRecyclerBinding;
-import com.example.qrinventarization.domain.model.Item;
+import com.example.qrinventarization.domain.model.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;

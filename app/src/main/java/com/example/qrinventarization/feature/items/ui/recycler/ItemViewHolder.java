@@ -1,14 +1,10 @@
 package com.example.qrinventarization.feature.items.ui.recycler;
 
-import android.view.View;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.qrinventarization.databinding.ItemRecyclerBinding;
-import com.example.qrinventarization.domain.model.Item;
+import com.example.qrinventarization.domain.model.items.Item;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 

@@ -1,6 +1,5 @@
 package com.example.qrinventarization.feature.main.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,18 +8,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.qrinventarization.R;
-import com.example.qrinventarization.data.api.items.ItemApiService;
-import com.example.qrinventarization.domain.model.Items;
 import com.google.android.material.navigation.NavigationView;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -6,10 +6,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.qrinventarization.data.repository.ItemsRepository;
-import com.example.qrinventarization.domain.model.Item;
-import com.example.qrinventarization.domain.model.Items;
-import com.example.qrinventarization.domain.model.Object;
-import com.example.qrinventarization.feature.items.presentation.ItemsStatus;
+import com.example.qrinventarization.data.repository.PlacesRepository;
+import com.example.qrinventarization.domain.model.items.Item;
+import com.example.qrinventarization.domain.model.items.Object;
+import com.example.qrinventarization.domain.model.places.Place;
+import com.example.qrinventarization.domain.model.places.Places;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class ObjectViewModel extends ViewModel {
 
     private MutableLiveData<ObjectStatus> _status = new MutableLiveData<>();
     public LiveData<ObjectStatus> status = _status;
+    private MutableLiveData<List<Place>> _places = new MutableLiveData<>();
+    public LiveData<List<Place>> places = _places;
 
     public void load(long id){
         _status.setValue(ObjectStatus.LOADING);
@@ -64,6 +67,23 @@ public class ObjectViewModel extends ViewModel {
 
     public void history(long id){
         //TODO
+    }
+
+    public void places(){
+        _status.setValue(ObjectStatus.LOADING_PLACES);
+        PlacesRepository.getPlaces().enqueue(new Callback<Places>() {
+            @Override
+            public void onResponse(@NonNull Call<Places> call, @NonNull Response<Places> response) {
+                _status.setValue(ObjectStatus.LOADED_PLACES);
+                _places.setValue(response.body().places);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Places> call, @NonNull Throwable t) {
+                _status.setValue(ObjectStatus.FAILURE_PLACES);
+                t.printStackTrace();
+            }
+        });
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.qrinventarization.domain.model;
+package com.example.qrinventarization.domain.model.items;
 
 public class Object {
     public Item objects;

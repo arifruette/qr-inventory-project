@@ -6,9 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.qrinventarization.data.repository.ItemsRepository;
-import com.example.qrinventarization.domain.model.Item;
-import com.example.qrinventarization.domain.model.Items;
-import com.example.qrinventarization.feature.items.ui.ItemsFragment;
+import com.example.qrinventarization.domain.model.items.Item;
+import com.example.qrinventarization.domain.model.items.Items;
 
 import java.util.List;
 

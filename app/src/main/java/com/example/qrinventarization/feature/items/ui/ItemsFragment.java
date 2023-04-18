@@ -8,17 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.qrinventarization.databinding.FragmentItemsBinding;
-import com.example.qrinventarization.domain.model.Item;
+import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.feature.items.presentation.ItemsStatus;
 import com.example.qrinventarization.feature.items.presentation.ItemsViewModel;
 import com.example.qrinventarization.feature.items.ui.recycler.ItemAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsFragment extends Fragment {

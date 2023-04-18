@@ -4,5 +4,8 @@ public enum ObjectStatus {
     LOADING,
     LOADED,
     FAILURE,
-    DELETED
+    DELETED,
+    LOADED_PLACES,
+    FAILURE_PLACES,
+    LOADING_PLACES
 }

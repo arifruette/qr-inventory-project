@@ -1,6 +1,4 @@
-package com.example.qrinventarization.domain.model;
-
-import com.google.gson.annotations.SerializedName;
+package com.example.qrinventarization.domain.model.items;
 
 import java.util.List;
 

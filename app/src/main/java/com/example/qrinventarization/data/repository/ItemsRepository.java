@@ -1,12 +1,8 @@
 package com.example.qrinventarization.data.repository;
 
-import com.example.qrinventarization.data.api.items.ItemApi;
 import com.example.qrinventarization.data.api.items.ItemApiService;
-import com.example.qrinventarization.domain.model.Item;
-import com.example.qrinventarization.domain.model.Items;
-import com.example.qrinventarization.domain.model.Object;
-
-import java.util.List;
+import com.example.qrinventarization.domain.model.items.Items;
+import com.example.qrinventarization.domain.model.items.Object;
 
 import retrofit2.Call;
 

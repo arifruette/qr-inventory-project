@@ -1,7 +1,7 @@
 package com.example.qrinventarization.data.api.items;
 
-import com.example.qrinventarization.domain.model.Items;
-import com.example.qrinventarization.domain.model.Object;
+import com.example.qrinventarization.domain.model.items.Items;
+import com.example.qrinventarization.domain.model.items.Object;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
