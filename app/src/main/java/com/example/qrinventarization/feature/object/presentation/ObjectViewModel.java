@@ -58,4 +58,12 @@ public class ObjectViewModel extends ViewModel {
         });
     }
 
+    public void update(long id){
+        //TODO
+    }
+
+    public void history(long id){
+        //TODO
+    }
+
 }
