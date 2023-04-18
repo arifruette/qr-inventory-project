@@ -14,7 +14,7 @@ public class RetrofitService {
     private static Retrofit retrofit;
 
     private static Retrofit create(){
-        String BASE_URL = "http://10.18.1.134:8080/api/";
+        String BASE_URL = "http://192.168.43.245:8080/api/";
 
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

@@ -61,8 +61,18 @@ public class ObjectViewModel extends ViewModel {
         });
     }
 
-    public void update(long id){
-        //TODO
+    public void update(long id, Item item){
+        ItemsRepository.updateObject(id, item).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                _status.setValue(ObjectStatus.LOADED);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void history(long id){

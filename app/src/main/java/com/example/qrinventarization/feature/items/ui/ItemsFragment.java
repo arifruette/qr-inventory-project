@@ -40,6 +40,7 @@ public class ItemsFragment extends Fragment {
         adapter = new ItemAdapter(id -> {
             Navigation.findNavController(binding.getRoot()).navigate(ItemsFragmentDirections.actionItemsFragmentToObject(id));
         });
+
         binding.recycler.setAdapter(adapter);
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.items.observe(getViewLifecycleOwner(), this::renderItems);

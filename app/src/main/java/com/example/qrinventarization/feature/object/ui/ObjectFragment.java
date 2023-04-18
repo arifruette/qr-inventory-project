@@ -54,14 +54,20 @@ public class ObjectFragment extends Fragment {
         viewModel.item.observe(getViewLifecycleOwner(), this::renderItem);
         if(savedInstanceState==null) viewModel.load(args.getId());
 
-        binding.editObject.setOnClickListener(new View.OnClickListener() {
+        binding.editObject.setOnClickListener(view1 -> {
+            binding.objectName.setEnabled(true);
+            binding.objectNumber.setEnabled(true);
+            viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
+            viewModel.places();
+            viewModel.places.observe(getViewLifecycleOwner(), ObjectFragment.this::renderPlaces);
+        });
+
+        binding.saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                binding.objectName.setEnabled(true);
-                binding.objectNumber.setEnabled(true);
+            public void onClick(View v) {
+                viewModel.update(args.getId(), new Item(args.getId(), binding.objectName.getText().toString(), binding.objectNumber.getText().toString(), binding.spinner.getSelectedItem().toString()));
                 viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
-                viewModel.places();
-                viewModel.places.observe(getViewLifecycleOwner(), ObjectFragment.this::renderPlaces);
+                System.out.println(binding.spinner.getSelectedItem());
             }
         });
     }
@@ -96,6 +102,10 @@ public class ObjectFragment extends Fragment {
                 binding.placesError.setVisibility(View.INVISIBLE);
                 binding.historyObject.setVisibility(View.VISIBLE);
                 binding.objectName.setVisibility(View.VISIBLE);
+                binding.objectName.setEnabled(false);
+                binding.objectPlace.setEnabled(false);
+                binding.objectNumber.setEnabled(false);
+                binding.saveChanges.setVisibility(View.INVISIBLE);
 
                 binding.objectProgress.setVisibility(View.INVISIBLE);
 
@@ -138,6 +148,9 @@ public class ObjectFragment extends Fragment {
                 binding.placesError.setVisibility(View.INVISIBLE);
                 binding.saveChanges.setVisibility(View.VISIBLE);
 
+                binding.objectName.setEnabled(true);
+                binding.objectNumber.setEnabled(true);
+
                 binding.historyObject.setVisibility(View.INVISIBLE);
                 binding.objectName.setVisibility(View.VISIBLE);
 
@@ -172,6 +185,7 @@ public class ObjectFragment extends Fragment {
     private void renderItem(Item item){
         binding.objectName.setText(item.getName());
         binding.objectNumber.setText(item.getSerial_number());
+        System.out.println(item.getPlace());
         if(item.getPlace() != null){
             binding.objectPlace.setText(item.getPlace());
         }else{
@@ -183,7 +197,9 @@ public class ObjectFragment extends Fragment {
     private void renderPlaces(List<Place> places){
         List<String> lst = new ArrayList<>();
         for(int i = 0;i < places.size();i++){
-            lst.add(places.get(i).getName());
+
+                lst.add(places.get(i).getText().toString().replace(".0", ""));
+
         }
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, lst);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

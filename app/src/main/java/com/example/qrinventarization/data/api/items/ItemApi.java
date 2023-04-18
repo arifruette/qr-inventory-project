@@ -1,12 +1,15 @@
 package com.example.qrinventarization.data.api.items;
 
+import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.domain.model.items.Items;
 import com.example.qrinventarization.domain.model.items.Object;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 
 public interface ItemApi {
@@ -25,9 +28,12 @@ public interface ItemApi {
             long id
     );
 
-    @DELETE("jobs/{id}")
+    @DELETE("objects/{id}")
     Call<Void> deleteUser(
             @Path("id")
             long id
     );
+
+    @PATCH("objects/{id}")
+    Call<Void> updateObject(@Path("id") long id, @Body Item item);
 }

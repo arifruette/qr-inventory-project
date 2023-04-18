@@ -146,7 +146,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:visibility="invisible"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/objectPlace" />
