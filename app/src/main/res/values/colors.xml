@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorBlue_Figma">#597DA3</color>
+    <color name="stroke_color">#EBEBEB</color>
+    <color name="color_hint">#7E7E9A</color>
+</resources>
