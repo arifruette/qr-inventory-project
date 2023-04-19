@@ -43,12 +43,7 @@ public class ObjectFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.imageButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(binding.getRoot()).navigateUp();
-            }
-        });
+        binding.imageButton.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigateUp());
 
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.item.observe(getViewLifecycleOwner(), this::renderItem);

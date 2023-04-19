@@ -1,5 +1,7 @@
 package com.example.qrinventarization.feature.places.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -50,7 +52,26 @@ public class PlacesFragment extends Fragment {
         binding.startInventarization.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.listView.getCheckedItemPositions();
+                int cntChoice = binding.listView.getCount();
+
+                ArrayList<String> checked = new ArrayList<>();
+
+                SparseBooleanArray sparseBooleanArray = binding.listView.getCheckedItemPositions();
+
+                for (int i = 0; i < cntChoice; i++) {
+
+                    if (sparseBooleanArray.get(i)) {
+                        String post = binding.listView.getItemAtPosition(i).toString();
+                        checked.add(post);
+                    }
+                }
+                SharedPreferences sp = getActivity().getSharedPreferences("mysett", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putString("places", checked.toString());
+                edit.apply();
+
+
+                System.out.println(checked.toString());
             }
         });
     }
