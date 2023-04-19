@@ -1,9 +1,12 @@
 package com.example.qrinventarization.feature.places.ui;
 
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,17 +15,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qrinventarization.databinding.FragmentPlacesBinding;
 import com.example.qrinventarization.domain.model.places.Place;
+import com.example.qrinventarization.feature.items.presentation.ItemsStatus;
+import com.example.qrinventarization.feature.places.presentation.PlacesStatus;
 import com.example.qrinventarization.feature.places.presentation.PlacesViewModel;
-import com.example.qrinventarization.feature.places.ui.recycler.PlacesAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlacesFragment extends Fragment {
 
-    private List<Place> places;
+    private ArrayAdapter<String> locations_adapter;
 
     private PlacesViewModel viewModel;
-    private PlacesAdapter adapter;
 
     private FragmentPlacesBinding binding;
 
@@ -37,26 +41,60 @@ public class PlacesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = new PlacesAdapter(this::changeById);
 
-        binding.placesRecycler.setAdapter(adapter);
-
-
-        viewModel.places.observe(getViewLifecycleOwner(), this::setPlaces);
+        viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
+        viewModel.places.observe(getViewLifecycleOwner(), this::setAdapter);
 
         if(savedInstanceState == null) viewModel.load();
-    }
 
-    public void setPlaces(List<Place> lst){
-        this.places = lst;
-        adapter.setPlaces(lst);
-    }
-
-    public void changeById(long id){
-        for(int i = 0;i < places.size();i++){
-            if(places.get(i).getId() == id){
-                places.get(i).setChecked(true);
+        binding.startInventarization.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.listView.getCheckedItemPositions();
             }
+        });
+    }
+
+    private void renderStatus(PlacesStatus status){
+        switch (status){
+
+            case LOADING:
+                binding.listView.setVisibility(View.INVISIBLE);
+                binding.errorPlaces.setVisibility(View.INVISIBLE);
+                binding.placesProgress.setVisibility(View.VISIBLE);
+
+
+                break;
+            case LOADED:
+                binding.listView.setVisibility(View.VISIBLE);
+                binding.errorPlaces.setVisibility(View.INVISIBLE);
+                binding.placesProgress.setVisibility(View.INVISIBLE);
+                break;
+
+            case FAILURE:
+                binding.listView.setVisibility(View.INVISIBLE);
+                binding.errorPlaces.setVisibility(View.VISIBLE);
+                binding.placesProgress.setVisibility(View.INVISIBLE);
+                break;
         }
+    }
+
+    private void setAdapter(@NonNull List<Place> lst){
+        ArrayList<String> places = new ArrayList<>();
+        for(int i =0;i<lst.size();i++){
+            places.add(lst.get(i).getText().toString().replace(".0", ""));
+        }
+        locations_adapter = new ArrayAdapter<String>
+                (getContext(), android.R.layout.simple_list_item_multiple_choice, places);
+
+        binding.listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        binding.listView.setAdapter(locations_adapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }
