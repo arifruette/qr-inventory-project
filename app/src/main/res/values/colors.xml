@@ -5,4 +5,8 @@
     <color name="colorBlue_Figma">#597DA3</color>
     <color name="stroke_color">#EBEBEB</color>
     <color name="color_hint">#7E7E9A</color>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="gray">#eaeaea</color>
+    <color name="forTitle">#656666</color>
 </resources>
