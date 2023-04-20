@@ -23,7 +23,11 @@
         android:id="@+id/placesFragment"
         android:name="com.example.qrinventarization.feature.places.ui.PlacesFragment"
         android:label="fragment_places"
-        tools:layout="@layout/fragment_places" />
+        tools:layout="@layout/fragment_places" >
+        <action
+            android:id="@+id/action_placesFragment_to_inventarizationFragment"
+            app:destination="@id/inventarizationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/object"
         android:name="com.example.qrinventarization.feature.object.ui.ObjectFragment"
@@ -31,6 +35,15 @@
         tools:layout="@layout/fragment_object">
         <argument android:name="id"
             app:argType="long"
+            app:nullable="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/inventarizationFragment"
+        android:name="com.example.qrinventarization.feature.inventarization.ui.InventarizationFragment"
+        android:label="fragment_inventarization2"
+        tools:layout="@layout/fragment_inventarization">
+        <argument android:name="locations"
+            app:argType="string"
             app:nullable="false"/>
     </fragment>
 </navigation>

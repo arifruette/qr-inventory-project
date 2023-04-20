@@ -1,7 +1,5 @@
 package com.example.qrinventarization.feature.inventarization.ui;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,19 +12,20 @@ import android.view.ViewGroup;
 
 import com.example.qrinventarization.R;
 import com.example.qrinventarization.databinding.FragmentInventarizationBinding;
+import com.example.qrinventarization.feature.object.ui.ObjectFragmentArgs;
 
-import java.util.Arrays;
 
 public class InventarizationFragment extends Fragment {
 
     private FragmentInventarizationBinding binding;
-    private SharedPreferences sp;
-
+    private InventarizationFragmentArgs args;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentInventarizationBinding.inflate(inflater);
+        args = InventarizationFragmentArgs.fromBundle(requireArguments());
+        System.out.println(args.getLocations());
         return binding.getRoot();
     }
 
@@ -34,8 +33,5 @@ public class InventarizationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        sp = getActivity().getSharedPreferences("mysett", Context.MODE_PRIVATE);
-        String[] lol = sp.getString("places", "null").split(" ");
-        System.out.println(Arrays.toString(lol));
     }
 }

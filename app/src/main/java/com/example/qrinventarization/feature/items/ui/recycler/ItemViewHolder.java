@@ -8,7 +8,7 @@ import com.example.qrinventarization.domain.model.items.Item;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
-    private ItemRecyclerBinding binding; //TODO НЕ уверен
+    private ItemRecyclerBinding binding;
     private ItemClickListener listener;
 
     public ItemViewHolder(ItemRecyclerBinding binding, ItemClickListener listener){

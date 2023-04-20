@@ -11,6 +11,7 @@ public class Item {
     private String serial_number;
 
     private String place;
+    private boolean checked;
 
     public Item(long id, String name, String serial_number, String place) {
         this.id = id;
@@ -33,5 +34,13 @@ public class Item {
 
     public String getPlace() {
         return place;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setCheckedItem(boolean checked) {
+        this.checked = checked;
     }
 }

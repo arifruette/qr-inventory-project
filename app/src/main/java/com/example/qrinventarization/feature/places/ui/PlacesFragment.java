@@ -1,7 +1,5 @@
 package com.example.qrinventarization.feature.places.ui;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -14,10 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.qrinventarization.databinding.FragmentPlacesBinding;
 import com.example.qrinventarization.domain.model.places.Place;
-import com.example.qrinventarization.feature.items.presentation.ItemsStatus;
+import com.example.qrinventarization.feature.items.ui.ItemsFragmentDirections;
 import com.example.qrinventarization.feature.places.presentation.PlacesStatus;
 import com.example.qrinventarization.feature.places.presentation.PlacesViewModel;
 
@@ -65,12 +64,8 @@ public class PlacesFragment extends Fragment {
                         checked.add(post);
                     }
                 }
-                SharedPreferences sp = getActivity().getSharedPreferences("mysett", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit = sp.edit();
-                edit.putString("places", checked.toString());
-                edit.apply();
 
-
+                Navigation.findNavController(binding.getRoot()).navigate(PlacesFragmentDirections.actionPlacesFragmentToInventarizationFragment(checked.toString()));
                 System.out.println(checked.toString());
             }
         });
