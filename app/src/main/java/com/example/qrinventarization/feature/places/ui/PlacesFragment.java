@@ -48,26 +48,23 @@ public class PlacesFragment extends Fragment {
 
         if(savedInstanceState == null) viewModel.load();
 
-        binding.startInventarization.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int cntChoice = binding.listView.getCount();
+        binding.startInventarization.setOnClickListener(view1 -> {
+            int cntChoice = binding.listView.getCount();
 
-                ArrayList<String> checked = new ArrayList<>();
+            ArrayList<String> checked = new ArrayList<>();
 
-                SparseBooleanArray sparseBooleanArray = binding.listView.getCheckedItemPositions();
+            SparseBooleanArray sparseBooleanArray = binding.listView.getCheckedItemPositions();
 
-                for (int i = 0; i < cntChoice; i++) {
+            for (int i = 0; i < cntChoice; i++) {
 
-                    if (sparseBooleanArray.get(i)) {
-                        String post = binding.listView.getItemAtPosition(i).toString();
-                        checked.add(post);
-                    }
+                if (sparseBooleanArray.get(i)) {
+                    String post = binding.listView.getItemAtPosition(i).toString();
+                    checked.add(post);
                 }
-
-                Navigation.findNavController(binding.getRoot()).navigate(PlacesFragmentDirections.actionPlacesFragmentToInventarizationFragment(checked.toString()));
-                System.out.println(checked.toString());
             }
+
+            Navigation.findNavController(binding.getRoot()).navigate(PlacesFragmentDirections.actionPlacesFragmentToInventarizationFragment(String.join(" ", checked)));
+            //System.out.println(checked.toString());
         });
     }
 

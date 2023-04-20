@@ -18,18 +18,18 @@ import retrofit2.Response;
 public class InventarizationViewModel extends ViewModel {
 
     private MutableLiveData<InventarizationStatus> _status = new MutableLiveData<>();
-    private LiveData<InventarizationStatus> status = _status;
+    public LiveData<InventarizationStatus> status = _status;
 
     private MutableLiveData<List<Item>> _items = new MutableLiveData<>();
-    private LiveData<List<Item>> items = _items;
+    public LiveData<List<Item>> items = _items;
 
-    public void load(String places){
+    public void load(){
         _status.setValue(InventarizationStatus.LOADING);
         ItemsRepository.getItems().enqueue(new Callback<Items>() {
             @Override
             public void onResponse(@NonNull Call<Items> call, @NonNull Response<Items> response) {
                 _status.setValue(InventarizationStatus.LOADED);
-
+                _items.setValue(response.body().objects);
             }
 
             @Override
