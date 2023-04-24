@@ -8,5 +8,6 @@
 
     </style>
 
-    <style name="Theme.QrInventarization" parent="Base.Theme.QrInventarization" />
+    <style name="Theme.QrInventarization" parent="Base.Theme.QrInventarization">
+    </style>
 </resources>

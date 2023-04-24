@@ -10,6 +10,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ItemApi {
@@ -36,4 +37,7 @@ public interface ItemApi {
 
     @PATCH("objects/{id}")
     Call<Void> updateObject(@Path("id") long id, @Body Item item);
+
+    @POST("objects")
+    Call<Void> addObject(@Body Item item);
 }

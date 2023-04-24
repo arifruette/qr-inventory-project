@@ -23,4 +23,7 @@ public class ItemsRepository {
     public static Call<Void> updateObject(long id, Item item){
         return ItemApiService.getInstance().updateObject(id, item);
     }
+    public static Call<Void> addObject(Item item){
+        return ItemApiService.getInstance().addObject(item);
+    }
  }
