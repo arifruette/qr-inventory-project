@@ -57,11 +57,11 @@ public class ObjectFragment extends Fragment {
             viewModel.places.observe(getViewLifecycleOwner(), ObjectFragment.this::renderPlaces);
         });
 
-        binding.saveChanges.setOnClickListener(v -> {
-            viewModel.update(args.getId(), new Item(args.getId(), binding.objectName.getText().toString(), binding.objectNumber.getText().toString(), binding.spinner.getSelectedItem().toString()));
-            viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
-            System.out.println(binding.spinner.getSelectedItem());
-        });
+//        binding.saveChanges.setOnClickListener(v -> {
+//            viewModel.update(args.getId(), new Item(args.getId(), binding.objectName.getText().toString(), binding.objectNumber.getText().toString(), binding.spinner.getSelectedItem().toString()));
+//            viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
+//            System.out.println(binding.spinner.getSelectedItem());
+//        });
     }
 
     private void renderStatus(ObjectStatus status){
