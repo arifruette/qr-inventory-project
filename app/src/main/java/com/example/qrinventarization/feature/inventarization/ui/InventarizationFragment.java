@@ -1,28 +1,22 @@
 package com.example.qrinventarization.feature.inventarization.ui;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.example.qrinventarization.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.qrinventarization.databinding.FragmentInventarizationBinding;
 import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.feature.inventarization.presentation.InventarizationStatus;
 import com.example.qrinventarization.feature.inventarization.presentation.InventarizationViewModel;
 import com.example.qrinventarization.feature.inventarization.ui.recycler.InventarizationAdapter;
-import com.example.qrinventarization.feature.object.presentation.ObjectViewModel;
-import com.example.qrinventarization.feature.object.ui.ObjectFragment;
-import com.example.qrinventarization.feature.object.ui.ObjectFragmentArgs;
-import com.example.qrinventarization.feature.places.presentation.PlacesStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +40,8 @@ public class InventarizationFragment extends Fragment {
         binding = FragmentInventarizationBinding.inflate(inflater);
         viewModel = new ViewModelProvider(this).get(InventarizationViewModel.class);
         args = InventarizationFragmentArgs.fromBundle(requireArguments());
+        adapter_objects = new InventarizationAdapter();
+
         if(savedInstanceState == null) {
             viewModel.load();
 
@@ -62,8 +58,11 @@ public class InventarizationFragment extends Fragment {
         binding.locationsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (!parent.getItemAtPosition(position).equals("Выберите помещение:")){
-                    adapter_objects.setItems(inventarizationItems.get(parent.getItemAtPosition(position)));
+                if (parent.getItemAtPosition(position).equals("Выберите помещение:    ")){
+
+                }else{
+                    System.out.println(((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position))));
+                    adapter_objects.setItems((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position)));
                     binding.rV.setAdapter(adapter_objects);
                 }
             }
@@ -98,9 +97,9 @@ public class InventarizationFragment extends Fragment {
         }
         locations = new ArrayList<>();
         locations.addAll(inventarizationItems.keySet());
-        locations.add(0, "Выберите помещение:    ");
 
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, locations);
+        binding.locationsSpinner.setPrompt("Выберите помещение");
         binding.locationsSpinner.setAdapter(adapter);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //System.out.println(inventarizationItems.toString());

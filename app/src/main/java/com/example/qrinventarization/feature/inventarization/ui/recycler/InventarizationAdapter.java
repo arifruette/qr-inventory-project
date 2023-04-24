@@ -33,7 +33,7 @@ public class InventarizationAdapter extends RecyclerView.Adapter<Inventarization
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items != null ? items.size() : 0;
     }
 
     public void setItems(List<Item> items) {

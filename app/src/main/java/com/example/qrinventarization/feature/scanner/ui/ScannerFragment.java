@@ -57,8 +57,7 @@ public class ScannerFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        // if the intentResult is null then
-        // toast a message as "cancelled"
+
         if (intentResult != null) {
             Log.d("TESTQR", " " + intentResult.getContents() + " " + intentResult.getFormatName());
             if (intentResult.getContents() == null) {
