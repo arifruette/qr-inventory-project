@@ -20,6 +20,7 @@ import com.example.qrinventarization.feature.object.presentation.ObjectStatus;
 import com.example.qrinventarization.feature.object.presentation.ObjectViewModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ObjectFragment extends Fragment {
@@ -29,6 +30,7 @@ public class ObjectFragment extends Fragment {
     private FragmentObjectBinding binding;
     private ObjectFragmentArgs args;
     private ArrayAdapter adapter;
+    private HashMap<String, Long> places_map;
 
     @Nullable
     @Override
@@ -57,11 +59,15 @@ public class ObjectFragment extends Fragment {
             viewModel.places.observe(getViewLifecycleOwner(), ObjectFragment.this::renderPlaces);
         });
 
-//        binding.saveChanges.setOnClickListener(v -> {
-//            viewModel.update(args.getId(), new Item(args.getId(), binding.objectName.getText().toString(), binding.objectNumber.getText().toString(), binding.spinner.getSelectedItem().toString()));
-//            viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
-//            System.out.println(binding.spinner.getSelectedItem());
-//        });
+        binding.saveChanges.setOnClickListener(v -> {
+            viewModel.update(args.getId(), new Item(args.getId(), binding.objectName.getText().toString(),
+                    binding.objectNumber.getText().toString(),
+                    binding.spinner.getSelectedItem().toString(),
+                    String.valueOf(places_map.get(binding.spinner.getSelectedItem().toString()))
+                    ));
+            viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
+            System.out.println(binding.spinner.getSelectedItem());
+        });
     }
 
     private void renderStatus(ObjectStatus status){
@@ -188,9 +194,10 @@ public class ObjectFragment extends Fragment {
 
     private void renderPlaces(List<Place> places){
         List<String> lst = new ArrayList<>();
+        places_map = new HashMap<>();
         for(int i = 0;i < places.size();i++){
-
-                lst.add(places.get(i).getText().toString().replace(".0", ""));
+            places_map.put(places.get(i).getText().toString(), places.get(i).getId());
+            lst.add(places.get(i).getText().toString().replace(".0", ""));
 
         }
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, lst);

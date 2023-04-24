@@ -11,13 +11,15 @@ public class Item {
     private String serial_number;
 
     private String obj_place_text;
+    private String obj_place;
     private boolean checked;
 
-    public Item(long id, String name, String serial_number, String place) {
+    public Item(long id, String name, String serial_number, String place, String obj_place) {
         this.id = id;
         this.name = name;
         this.serial_number = serial_number;
         this.obj_place_text = place;
+        this.obj_place = obj_place;
     }
 
     public long getId() {
@@ -42,5 +44,13 @@ public class Item {
 
     public void setCheckedItem(boolean checked) {
         this.checked = checked;
+    }
+
+    public String getObj_place() {
+        return obj_place;
+    }
+
+    public void setObj_place(String obj_place) {
+        this.obj_place = obj_place;
     }
 }
