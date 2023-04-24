@@ -10,14 +10,14 @@ public class Item {
 
     private String serial_number;
 
-    private String place;
+    private String obj_place_text;
     private boolean checked;
 
     public Item(long id, String name, String serial_number, String place) {
         this.id = id;
         this.name = name;
         this.serial_number = serial_number;
-        this.place = place;
+        this.obj_place_text = place;
     }
 
     public long getId() {
@@ -33,7 +33,7 @@ public class Item {
     }
 
     public String getPlace() {
-        return place;
+        return obj_place_text;
     }
 
     public boolean isChecked() {
