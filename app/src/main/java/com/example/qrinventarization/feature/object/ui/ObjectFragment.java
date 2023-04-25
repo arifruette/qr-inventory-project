@@ -1,10 +1,12 @@
 package com.example.qrinventarization.feature.object.ui;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +52,7 @@ public class ObjectFragment extends Fragment {
 
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.item.observe(getViewLifecycleOwner(), this::renderItem);
-        if(savedInstanceState==null) viewModel.load(args.getId());
+        if (savedInstanceState == null) viewModel.load(args.getId());
 
         binding.editObject.setOnClickListener(view1 -> {
             binding.objectName.setEnabled(true);
@@ -62,10 +64,10 @@ public class ObjectFragment extends Fragment {
 
         binding.saveChanges.setOnClickListener(v -> {
             Item update;
-            if(binding.spinner.getSelectedItem().toString().equals("Не указано")){
+            if (binding.spinner.getSelectedItem().toString().equals("Не указано")) {
                 update = new Item(binding.objectName.getText().toString(),
                         binding.objectNumber.getText().toString());
-            }else{
+            } else {
                 update = new Item(binding.objectName.getText().toString(),
                         binding.objectNumber.getText().toString(),
                         places_map.get(binding.spinner.getSelectedItem().toString()));
@@ -73,11 +75,15 @@ public class ObjectFragment extends Fragment {
             viewModel.update(args.getId(), update);
             viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
             binding.spinner.setVisibility(View.INVISIBLE);
+            viewModel.load(args.getId());
+
+
+
         });
     }
 
-    private void renderStatus(ObjectStatus status){
-        switch (status){
+    private void renderStatus(ObjectStatus status) {
+        switch (status) {
 
             case LOADING:
             case LOADING_PLACES:
@@ -186,22 +192,22 @@ public class ObjectFragment extends Fragment {
         }
     }
 
-    private void renderItem(Item item){
+    private void renderItem(Item item) {
         binding.objectName.setText(item.getName());
         binding.objectNumber.setText(item.getSerial_number());
         System.out.println(item.getPlace());
-        if(!Objects.equals(item.getPlace(), "None")){
+        if (!Objects.equals(item.getPlace(), "None")) {
             binding.objectPlace.setText(item.getPlace());
-        }else{
+        } else {
             binding.objectPlace.setText("Не указано");
         }
 
     }
 
-    private void renderPlaces(List<Place> places){
+    private void renderPlaces(List<Place> places) {
         List<String> lst = new ArrayList<>();
         places_map = new HashMap<>();
-        for(int i = 0;i < places.size();i++){
+        for (int i = 0; i < places.size(); i++) {
             places_map.put(places.get(i).getText().toString().replace(".0", ""), places.get(i).getId());
             lst.add(places.get(i).getText().toString().replace(".0", ""));
 

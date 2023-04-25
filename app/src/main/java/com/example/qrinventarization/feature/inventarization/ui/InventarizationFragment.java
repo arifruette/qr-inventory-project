@@ -3,6 +3,7 @@ package com.example.qrinventarization.feature.inventarization.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.qrinventarization.ScannerScreen;
 import com.example.qrinventarization.databinding.FragmentInventarizationBinding;
@@ -21,7 +24,6 @@ import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.feature.inventarization.presentation.InventarizationStatus;
 import com.example.qrinventarization.feature.inventarization.presentation.InventarizationViewModel;
 import com.example.qrinventarization.feature.inventarization.ui.recycler.InventarizationAdapter;
-import com.example.qrinventarization.feature.main.ui.MainActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -41,6 +43,30 @@ public class InventarizationFragment extends Fragment {
     private ArrayList<String> locations;
     private ArrayAdapter<String> adapter;
     private InventarizationAdapter adapter_objects;
+    private long onBackPressedTime;
+    private Toast backToast;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                if(onBackPressedTime + 2000 > System.currentTimeMillis()){
+                    backToast.cancel();
+                    Navigation.findNavController(binding.getRoot()).navigateUp();
+                }else{
+                    backToast = Toast.makeText(getContext(), "Вы уверены что хотите покинуть окно инвентаризации?" + "\n" + "Прогресс не сохранится", Toast.LENGTH_SHORT);
+                    backToast.setGravity(Gravity.BOTTOM, 0, 250);
+                    backToast.show();
+                }
+                onBackPressedTime = System.currentTimeMillis();
+
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -176,11 +202,18 @@ public class InventarizationFragment extends Fragment {
                 Toast.makeText(getContext(), "Отмена", Toast.LENGTH_SHORT).show();
             } else {
                 List<Item> items = inventarizationItems.get(binding.locationsSpinner.getSelectedItem().toString());
+                boolean flag = true;
                 for(int i = 0; i < items.size();i++){
                     if(Objects.equals(items.get(i).getSerial_number(), intentResult.getContents())){
+                        flag = false;
                         items.get(i).setCheckedItem(true);
                         adapter_objects.setItems(items);
                     }
+                }
+                if(flag){
+                    Toast toast = Toast.makeText(getContext(), "Этого объекта нет в данном помещении", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 250);
+                    toast.show();
                 }
             }
         }

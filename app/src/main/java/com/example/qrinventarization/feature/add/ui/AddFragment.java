@@ -1,10 +1,12 @@
 package com.example.qrinventarization.feature.add.ui;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,6 +60,9 @@ public class AddFragment extends Fragment {
                                 reversed.get(binding.spinnerAdd.getSelectedItem().toString()));
                     }
                     viewModel.add(created);
+                    Toast toast = Toast.makeText(getContext(), "Объект успешно добавлен", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 270);
+                    toast.show();
                 }
             }
         });

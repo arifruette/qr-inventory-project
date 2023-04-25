@@ -30,7 +30,6 @@ public class ItemsViewModel extends ViewModel {
             @Override
             public void onResponse(@NonNull Call<Items> call, @NonNull Response<Items> response) {
                 _status.setValue(ItemsStatus.LOADED);
-                System.out.println(response.body());
                 _items.setValue(response.body().objects);
             }
 
