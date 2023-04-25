@@ -14,13 +14,24 @@ public class Item {
     private String obj_place;
     private boolean checked;
 
-    public Item(long id, String name, String serial_number, String place, String obj_place) {
+    public Item(long id, String name, String serial_number, String obj_place) {
         this.id = id;
         this.name = name;
         this.serial_number = serial_number;
-        this.obj_place_text = place;
         this.obj_place = obj_place;
     }
+
+    public Item(String name, String serial_number, String obj_place){
+        this.name = name;
+        this.serial_number = serial_number;
+        this.obj_place = obj_place;
+    }
+
+    public Item(String name, String serial_number){
+        this.name = name;
+        this.serial_number = serial_number;
+    }
+
 
     public long getId() {
         return id;

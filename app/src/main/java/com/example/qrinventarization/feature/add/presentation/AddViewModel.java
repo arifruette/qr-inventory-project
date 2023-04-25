@@ -32,7 +32,7 @@ public class AddViewModel extends ViewModel {
         ItemsRepository.addObject(item).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                _status.setValue(AddStatus.LOADED);
+                _status.setValue(AddStatus.ADDED);
 
             }
 

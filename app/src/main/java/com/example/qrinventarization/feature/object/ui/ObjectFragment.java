@@ -22,6 +22,7 @@ import com.example.qrinventarization.feature.object.presentation.ObjectViewModel
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class ObjectFragment extends Fragment {
 
@@ -30,7 +31,7 @@ public class ObjectFragment extends Fragment {
     private FragmentObjectBinding binding;
     private ObjectFragmentArgs args;
     private ArrayAdapter adapter;
-    private HashMap<String, Long> places_map;
+    private HashMap<String, String> places_map;
 
     @Nullable
     @Override
@@ -60,13 +61,18 @@ public class ObjectFragment extends Fragment {
         });
 
         binding.saveChanges.setOnClickListener(v -> {
-            viewModel.update(args.getId(), new Item(args.getId(), binding.objectName.getText().toString(),
-                    binding.objectNumber.getText().toString(),
-                    binding.spinner.getSelectedItem().toString(),
-                    String.valueOf(places_map.get(binding.spinner.getSelectedItem().toString()))
-                    ));
+            Item update;
+            if(binding.spinner.getSelectedItem().toString().equals("Не указано")){
+                update = new Item(binding.objectName.getText().toString(),
+                        binding.objectNumber.getText().toString());
+            }else{
+                update = new Item(binding.objectName.getText().toString(),
+                        binding.objectNumber.getText().toString(),
+                        places_map.get(binding.spinner.getSelectedItem().toString()));
+            }
+            viewModel.update(args.getId(), update);
             viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
-            System.out.println(binding.spinner.getSelectedItem());
+            binding.spinner.setVisibility(View.INVISIBLE);
         });
     }
 
@@ -184,7 +190,7 @@ public class ObjectFragment extends Fragment {
         binding.objectName.setText(item.getName());
         binding.objectNumber.setText(item.getSerial_number());
         System.out.println(item.getPlace());
-        if(item.getPlace() != null){
+        if(!Objects.equals(item.getPlace(), "None")){
             binding.objectPlace.setText(item.getPlace());
         }else{
             binding.objectPlace.setText("Не указано");
@@ -196,10 +202,11 @@ public class ObjectFragment extends Fragment {
         List<String> lst = new ArrayList<>();
         places_map = new HashMap<>();
         for(int i = 0;i < places.size();i++){
-            places_map.put(places.get(i).getText().toString(), places.get(i).getId());
+            places_map.put(places.get(i).getText().toString().replace(".0", ""), places.get(i).getId());
             lst.add(places.get(i).getText().toString().replace(".0", ""));
 
         }
+        lst.add(0, "Не указано");
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, lst);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinner.setAdapter(adapter);

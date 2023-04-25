@@ -1,10 +1,10 @@
 package com.example.qrinventarization.domain.model.places;
 
 public class Place {
-    private long id;
+    private String id;
     private Object text;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

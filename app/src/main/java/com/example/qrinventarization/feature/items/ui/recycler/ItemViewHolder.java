@@ -21,7 +21,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     public void bind(Item item){
         binding.name.setText(item.getName());
         binding.number.setText(item.getSerial_number());
-        System.out.println(item.getPlace());
         binding.place.setText(Objects.equals(item.getPlace(), "None") ? "Не указано" : item.getPlace());
         binding.getRoot().setOnClickListener(v -> listener.onClick(item.getId()));
     }

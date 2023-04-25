@@ -1,27 +1,35 @@
 package com.example.qrinventarization.feature.inventarization.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.qrinventarization.ScannerScreen;
 import com.example.qrinventarization.databinding.FragmentInventarizationBinding;
 import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.feature.inventarization.presentation.InventarizationStatus;
 import com.example.qrinventarization.feature.inventarization.presentation.InventarizationViewModel;
 import com.example.qrinventarization.feature.inventarization.ui.recycler.InventarizationAdapter;
+import com.example.qrinventarization.feature.main.ui.MainActivity;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 
 public class InventarizationFragment extends Fragment {
@@ -61,8 +69,8 @@ public class InventarizationFragment extends Fragment {
                 if (parent.getItemAtPosition(position).equals("Выберите помещение:    ")){
 
                 }else{
-                    System.out.println(((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position))));
-                    adapter_objects.setItems((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position)));
+                    System.out.println(((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position).toString())));
+                    adapter_objects.setItems((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position).toString()));
                     binding.rV.setAdapter(adapter_objects);
                 }
             }
@@ -72,7 +80,20 @@ public class InventarizationFragment extends Fragment {
 
             }
         });
+        binding.scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator intentIntegrator = IntentIntegrator.forSupportFragment(InventarizationFragment.this);
+                intentIntegrator.setPrompt("Сканируйте QR-код");
+                intentIntegrator.setOrientationLocked(true);
 
+                intentIntegrator.setCameraId(0);
+                intentIntegrator.setCaptureActivity(ScannerScreen.class);
+                //intentIntegrator.setTorchEnabled(true);//включает фонарик
+                intentIntegrator.setBeepEnabled(true);
+                intentIntegrator.initiateScan();
+            }
+        });
     }
 
     private void renderItems(List<Item> itemsList){
@@ -140,6 +161,28 @@ public class InventarizationFragment extends Fragment {
                 binding.contentLoading.setVisibility(View.INVISIBLE);
 
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        // if the intentResult is null then
+        // toast a message as "cancelled"
+        if (intentResult != null) {
+            Log.d("TESTQR", " " + intentResult.getContents() + " " + intentResult.getFormatName());
+            if (intentResult.getContents() == null) {
+                Toast.makeText(getContext(), "Отмена", Toast.LENGTH_SHORT).show();
+            } else {
+                List<Item> items = inventarizationItems.get(binding.locationsSpinner.getSelectedItem().toString());
+                for(int i = 0; i < items.size();i++){
+                    if(Objects.equals(items.get(i).getSerial_number(), intentResult.getContents())){
+                        items.get(i).setCheckedItem(true);
+                        adapter_objects.setItems(items);
+                    }
+                }
+            }
         }
     }
 

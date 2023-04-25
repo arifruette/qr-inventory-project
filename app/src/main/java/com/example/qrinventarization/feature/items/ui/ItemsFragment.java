@@ -44,7 +44,7 @@ public class ItemsFragment extends Fragment {
         binding.recycler.setAdapter(adapter);
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.items.observe(getViewLifecycleOwner(), this::renderItems);
-        if(savedInstanceState==null) viewModel.load();
+        viewModel.load();
     }
 
     private void renderStatus(ItemsStatus status){
