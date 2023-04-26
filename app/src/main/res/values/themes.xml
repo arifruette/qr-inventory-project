@@ -4,16 +4,21 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:textColor">@color/black</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">#223c7f</item>
         <item name="colorSecondary">@color/colorBlue_Figma</item>
-
     </style>
 
     <style name="Theme.QrInventarization" parent="Base.Theme.QrInventarization">
-        <item name="android:actionMenuTextAppearance">@style/menu_text_style</item>
+<!--        <item name="android:actionMenuTextAppearance">@style/menu_text_style</item>-->
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="menu_text_style" parent="Base.Theme.QrInventarization">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">#808080</item>
         <item name="android:textAllCaps">false</item>
+        <item name="simpleItemSelectedRippleColor">@color/black</item>
     </style>
 </resources>

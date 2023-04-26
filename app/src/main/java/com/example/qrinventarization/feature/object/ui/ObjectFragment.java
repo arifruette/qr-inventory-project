@@ -215,6 +215,7 @@ public class ObjectFragment extends Fragment {
         lst.add(0, "Не указано");
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, lst);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinner.setPrompt("Выберите помещение");
         binding.spinner.setAdapter(adapter);
     }
 
