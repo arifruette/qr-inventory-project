@@ -57,10 +57,13 @@ public class ObjectFragment extends Fragment {
         binding.editObject.setOnClickListener(view1 -> {
             binding.objectName.setEnabled(true);
             binding.objectNumber.setEnabled(true);
+            binding.delete.setVisibility(View.VISIBLE);
             viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
             viewModel.places();
             viewModel.places.observe(getViewLifecycleOwner(), ObjectFragment.this::renderPlaces);
         });
+
+        binding.delete.setOnClickListener(v -> viewModel.delete(args.getId()));
 
         binding.saveChanges.setOnClickListener(v -> {
             Item update;
@@ -75,6 +78,7 @@ public class ObjectFragment extends Fragment {
             viewModel.update(args.getId(), update);
             viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
             binding.spinner.setVisibility(View.INVISIBLE);
+            binding.delete.setVisibility(View.INVISIBLE);
             viewModel.load(args.getId());
 
 

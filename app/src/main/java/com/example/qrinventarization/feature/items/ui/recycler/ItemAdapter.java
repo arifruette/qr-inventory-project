@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qrinventarization.databinding.ItemRecyclerBinding;
+import com.example.qrinventarization.databinding.TestItemRecyclerBinding;
 import com.example.qrinventarization.domain.model.items.Item;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> implements
                     List<Item> itemModels = new ArrayList<>();
                     for(Item item: getItemModelListFilter){
                         if(item.getName().toLowerCase().contains(searchStr) ||
-                        item.getSerial_number().toLowerCase().contains(searchStr)){
+                                item.getSerial_number().toLowerCase().contains(searchStr)){
                             itemModels.add(item);
                         }
                     }
@@ -63,7 +64,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> implements
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemRecyclerBinding binding = ItemRecyclerBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        TestItemRecyclerBinding binding = TestItemRecyclerBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ItemViewHolder(binding, listener);
     }
 

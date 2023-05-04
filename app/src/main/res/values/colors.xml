@@ -10,4 +10,6 @@
     <color name="gray">#eaeaea</color>
     <color name="forTitle">#656666</color>
     <color name="red">#ff0000</color>
+    <color name="button_normal">#2196F3</color>
+    <color name="button_gray">#BDBDBD</color>
 </resources>
