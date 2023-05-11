@@ -36,6 +36,9 @@
         <argument android:name="id"
             app:argType="long"
             app:nullable="false"/>
+        <action
+            android:id="@+id/action_object_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/inventarizationFragment"
@@ -46,4 +49,8 @@
             app:argType="string"
             app:nullable="false"/>
     </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.qrinventarization.feature.history.ui.HistoryFragment"
+        android:label="HistoryFragment" />
 </navigation>

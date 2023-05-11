@@ -1,7 +1,6 @@
 package com.example.qrinventarization.feature.object.ui;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -65,6 +63,18 @@ public class ObjectFragment extends Fragment {
 
         binding.delete.setOnClickListener(v -> viewModel.delete(args.getId()));
 
+        binding.historyObject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(ObjectFragmentDirections.actionObjectToHistoryFragment());
+            }
+        });
+
+        binding.closeButton.setOnClickListener(v -> {
+            viewModel.set_status(ObjectStatus.LOADED);
+            viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
+        });
+
         binding.saveChanges.setOnClickListener(v -> {
             Item update;
             if (binding.spinner.getSelectedItem().toString().equals("Не указано")) {
@@ -105,6 +115,10 @@ public class ObjectFragment extends Fragment {
                 binding.numberHint.setVisibility(View.INVISIBLE);
                 binding.placeHint.setVisibility(View.INVISIBLE);
                 binding.objectError.setVisibility(View.INVISIBLE);
+                binding.closeButton.setVisibility(View.INVISIBLE);
+
+                binding.imageButton.setVisibility(View.VISIBLE);
+                binding.delete.setVisibility(View.INVISIBLE);
 
                 break;
             case LOADED:
@@ -128,6 +142,12 @@ public class ObjectFragment extends Fragment {
                 binding.placeHint.setVisibility(View.VISIBLE);
                 binding.objectError.setVisibility(View.INVISIBLE);
 
+                binding.closeButton.setVisibility(View.INVISIBLE);
+                binding.spinner.setVisibility(View.INVISIBLE);
+
+                binding.imageButton.setVisibility(View.VISIBLE);
+                binding.delete.setVisibility(View.INVISIBLE);
+
                 break;
 
             case FAILURE:
@@ -147,9 +167,15 @@ public class ObjectFragment extends Fragment {
                 binding.placeHint.setVisibility(View.INVISIBLE);
 
                 binding.objectError.setVisibility(View.VISIBLE);
+
+                binding.closeButton.setVisibility(View.INVISIBLE);
+
+                binding.imageButton.setVisibility(View.VISIBLE);
+                binding.delete.setVisibility(View.INVISIBLE);
                 break;
 
             case DELETED:
+                Toast.makeText(getContext(),"Объект '" + binding.objectName.getText().toString() + "' удален", Toast.LENGTH_SHORT).show();
                 Navigation.findNavController(binding.getRoot()).navigateUp();
                 break;
 
@@ -162,11 +188,15 @@ public class ObjectFragment extends Fragment {
                 binding.placesError.setVisibility(View.INVISIBLE);
                 binding.saveChanges.setVisibility(View.VISIBLE);
 
+                binding.imageButton.setVisibility(View.INVISIBLE);
+
+
                 binding.objectName.setEnabled(true);
                 binding.objectNumber.setEnabled(true);
 
                 binding.historyObject.setVisibility(View.INVISIBLE);
                 binding.objectName.setVisibility(View.VISIBLE);
+
 
                 binding.objectProgress.setVisibility(View.INVISIBLE);
 
@@ -174,6 +204,8 @@ public class ObjectFragment extends Fragment {
                 binding.numberHint.setVisibility(View.VISIBLE);
                 binding.placeHint.setVisibility(View.VISIBLE);
                 binding.objectError.setVisibility(View.INVISIBLE);
+
+                binding.closeButton.setVisibility(View.VISIBLE);
 
                 break;
 
@@ -192,6 +224,9 @@ public class ObjectFragment extends Fragment {
                 binding.placeHint.setVisibility(View.INVISIBLE);
 
                 binding.placesError.setVisibility(View.VISIBLE);
+                binding.imageButton.setVisibility(View.VISIBLE);
+                binding.closeButton.setVisibility(View.INVISIBLE);
+                binding.delete.setVisibility(View.INVISIBLE);
                 break;
         }
     }

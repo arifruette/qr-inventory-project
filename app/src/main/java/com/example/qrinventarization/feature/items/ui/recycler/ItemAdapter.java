@@ -15,6 +15,7 @@ import com.example.qrinventarization.databinding.TestItemRecyclerBinding;
 import com.example.qrinventarization.domain.model.items.Item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> implements Filterable {

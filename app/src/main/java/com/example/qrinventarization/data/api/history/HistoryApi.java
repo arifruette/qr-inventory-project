@@ -1,7 +1,11 @@
 package com.example.qrinventarization.data.api.history;
 
+import com.example.qrinventarization.domain.model.history.Histories;
+
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface HistoryApi {
-    //TODO
+    @GET("history")
+    Call<Histories> getHistory();
 }

@@ -1,6 +1,9 @@
 package com.example.qrinventarization.feature.inventarization.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,6 +45,8 @@ public class InventarizationFragment extends Fragment {
     private InventarizationViewModel viewModel;
     private ArrayList<String> locations;
     private ArrayAdapter<String> adapter;
+
+    private HashMap<Long, Boolean> checked_serial_numbers = new HashMap<>();
     private InventarizationAdapter adapter_objects;
     private long onBackPressedTime;
     private Toast backToast;
@@ -95,7 +100,7 @@ public class InventarizationFragment extends Fragment {
                 if (parent.getItemAtPosition(position).equals("Выберите помещение:    ")){
 
                 }else{
-                    System.out.println(((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position).toString())));
+                    //System.out.println(((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position).toString())));
                     adapter_objects.setItems((List<Item>) inventarizationItems.get(parent.getItemAtPosition(position).toString()));
                     binding.rV.setAdapter(adapter_objects);
                 }
@@ -119,6 +124,27 @@ public class InventarizationFragment extends Fragment {
                 intentIntegrator.setBeepEnabled(true);
                 intentIntegrator.initiateScan();
             }
+        });
+        binding.stopProcess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(String key:inventarizationItems.keySet()){
+                    for(Item item: inventarizationItems.get(key)){
+                        if(!item.isChecked()){
+                            checked_serial_numbers.put(item.getId(), false);
+                        }
+                    }
+                }
+                SharedPreferences sharedPreferences = InventarizationFragment.this.getActivity().getPreferences(Context.MODE_PRIVATE);
+                Editor editor = sharedPreferences.edit();
+                editor.putString("checked", checked_serial_numbers.toString());
+                editor.apply();
+                Navigation.findNavController(getView()).navigateUp();
+                Toast toast = Toast.makeText(getContext(), "Данные были сохранены", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 100);
+                toast.show();
+            }
+
         });
     }
 
@@ -194,8 +220,7 @@ public class InventarizationFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        // if the intentResult is null then
-        // toast a message as "cancelled"
+
         if (intentResult != null) {
             Log.d("TESTQR", " " + intentResult.getContents() + " " + intentResult.getFormatName());
             if (intentResult.getContents() == null) {
@@ -203,10 +228,12 @@ public class InventarizationFragment extends Fragment {
             } else {
                 List<Item> items = inventarizationItems.get(binding.locationsSpinner.getSelectedItem().toString());
                 boolean flag = true;
+                Log.d("TAG", intentResult.getContents());
                 for(int i = 0; i < items.size();i++){
                     if(Objects.equals(items.get(i).getSerial_number(), intentResult.getContents())){
                         flag = false;
                         items.get(i).setCheckedItem(true);
+                        checked_serial_numbers.put((Long) items.get(i).getId(), true);
                         adapter_objects.setItems(items);
                     }
                 }

@@ -5,8 +5,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.qrinventarization.data.repository.HistoryRepository;
 import com.example.qrinventarization.data.repository.ItemsRepository;
 import com.example.qrinventarization.data.repository.PlacesRepository;
+import com.example.qrinventarization.domain.model.history.Histories;
+import com.example.qrinventarization.domain.model.history.History;
 import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.domain.model.items.Object;
 import com.example.qrinventarization.domain.model.places.Place;
@@ -27,6 +30,10 @@ public class ObjectViewModel extends ViewModel {
     public LiveData<ObjectStatus> status = _status;
     private MutableLiveData<List<Place>> _places = new MutableLiveData<>();
     public LiveData<List<Place>> places = _places;
+
+    public void set_status(ObjectStatus status){
+        _status.setValue(status);
+    }
 
     public void load(long id){
         _status.setValue(ObjectStatus.LOADING);
@@ -73,10 +80,6 @@ public class ObjectViewModel extends ViewModel {
                 t.printStackTrace();
             }
         });
-    }
-
-    public void history(long id){
-        //TODO
     }
 
     public void places(){

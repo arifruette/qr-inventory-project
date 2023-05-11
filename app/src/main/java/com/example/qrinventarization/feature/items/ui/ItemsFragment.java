@@ -2,9 +2,6 @@ package com.example.qrinventarization.feature.items.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.qrinventarization.R;
 import com.example.qrinventarization.databinding.FragmentItemsBinding;
 import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.feature.items.presentation.ItemsStatus;
@@ -30,7 +26,6 @@ public class ItemsFragment extends Fragment {
     private ItemAdapter adapter;
 
     private FragmentItemsBinding binding;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
