@@ -135,10 +135,6 @@ public class InventarizationFragment extends Fragment {
                         }
                     }
                 }
-                SharedPreferences sharedPreferences = InventarizationFragment.this.getActivity().getPreferences(Context.MODE_PRIVATE);
-                Editor editor = sharedPreferences.edit();
-                editor.putString("checked", checked_serial_numbers.toString());
-                editor.apply();
                 Navigation.findNavController(getView()).navigateUp();
                 Toast toast = Toast.makeText(getContext(), "Данные были сохранены", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.BOTTOM, 0, 100);
@@ -168,6 +164,7 @@ public class InventarizationFragment extends Fragment {
                 }
             }
         }
+        System.out.println(inventarizationItems);
         locations = new ArrayList<>();
         locations.addAll(inventarizationItems.keySet());
 

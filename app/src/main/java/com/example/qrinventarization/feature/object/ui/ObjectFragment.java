@@ -1,6 +1,7 @@
 package com.example.qrinventarization.feature.object.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class ObjectFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         args = ObjectFragmentArgs.fromBundle(requireArguments());
+        Log.d("ID_OBJ0", String.valueOf(args.getId()));
         viewModel = new ViewModelProvider(this).get(ObjectViewModel.class);
         binding = FragmentObjectBinding.inflate(inflater);
         return binding.getRoot();
@@ -206,6 +208,7 @@ public class ObjectFragment extends Fragment {
                 binding.objectError.setVisibility(View.INVISIBLE);
 
                 binding.closeButton.setVisibility(View.VISIBLE);
+                binding.delete.setVisibility(View.VISIBLE);
 
                 break;
 
