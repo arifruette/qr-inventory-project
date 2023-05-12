@@ -12,5 +12,6 @@
     <color name="red">#ff0000</color>
     <color name="button_normal">#2196F3</color>
     <color name="button_gray">#BDBDBD</color>
+    <color name="hint">#7E7E9A</color>
     <color name="menu_header">#EFEFEF</color>
 </resources>
