@@ -90,7 +90,6 @@ public class ObjectFragment extends Fragment {
             viewModel.update(args.getId(), update);
             viewModel.status.observe(getViewLifecycleOwner(), ObjectFragment.this::renderStatus);
             binding.spinner.setVisibility(View.INVISIBLE);
-            binding.delete.setVisibility(View.INVISIBLE);
             viewModel.load(args.getId());
 
 

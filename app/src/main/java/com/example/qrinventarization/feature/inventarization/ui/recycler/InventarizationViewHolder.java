@@ -20,7 +20,7 @@ public class InventarizationViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Item item){
-        binding.checkbox1.setChecked(item.isChecked());
+        binding.checkbox1.setChecked(item.getChecked() == 2);
         binding.tv.setText(item.getName() + "\n" +item.getSerial_number());
     }
 }

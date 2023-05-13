@@ -11,8 +11,8 @@ import java.util.List;
 import retrofit2.Call;
 
 public class ItemsRepository {
-    public static Call<Items> getItems(){
-        return ItemApiService.getInstance().getItems();
+    public static Call<Items> getItems(String token){
+        return ItemApiService.getInstance().getItems("Bearer " + token);
     }
     public static Call<Object> getItem(long id){
         return ItemApiService.getInstance().getItem(id);

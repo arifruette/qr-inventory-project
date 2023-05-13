@@ -2,8 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/scannerFragment">
+    android:id="@+id/nav_graph_user"
+    app:startDestination="@id/itemsFragment">
 
     <fragment
         android:id="@+id/itemsFragment"
@@ -14,11 +14,6 @@
             android:id="@+id/action_itemsFragment_to_object"
             app:destination="@id/object" />
     </fragment>
-    <fragment
-        android:id="@+id/scannerFragment"
-        android:name="com.example.qrinventarization.feature.add.ui.AddFragment"
-        android:label="fragment_scanner"
-        tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/placesFragment"
         android:name="com.example.qrinventarization.feature.places.ui.PlacesFragment"
@@ -52,5 +47,6 @@
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.qrinventarization.feature.history.ui.HistoryFragment"
-        android:label="HistoryFragment" />
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history"/>
 </navigation>

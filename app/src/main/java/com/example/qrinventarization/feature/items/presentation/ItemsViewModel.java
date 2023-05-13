@@ -24,9 +24,9 @@ public class ItemsViewModel extends ViewModel {
     public LiveData<ItemsStatus> status = _status;
 
 
-    public void load(){
+    public void load(String token){
         _status.setValue(ItemsStatus.LOADING);
-        ItemsRepository.getItems().enqueue(new Callback<Items>() {
+        ItemsRepository.getItems(token).enqueue(new Callback<Items>() {
             @Override
             public void onResponse(@NonNull Call<Items> call, @NonNull Response<Items> response) {
                 _status.setValue(ItemsStatus.LOADED);

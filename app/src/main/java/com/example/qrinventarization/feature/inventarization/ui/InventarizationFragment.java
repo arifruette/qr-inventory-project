@@ -45,11 +45,11 @@ public class InventarizationFragment extends Fragment {
     private InventarizationViewModel viewModel;
     private ArrayList<String> locations;
     private ArrayAdapter<String> adapter;
-
-    private HashMap<Long, Boolean> checked_serial_numbers = new HashMap<>();
     private InventarizationAdapter adapter_objects;
     private long onBackPressedTime;
     private Toast backToast;
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,8 +81,11 @@ public class InventarizationFragment extends Fragment {
         args = InventarizationFragmentArgs.fromBundle(requireArguments());
         adapter_objects = new InventarizationAdapter();
 
+        sharedPreferences = getContext().getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+
+
         if(savedInstanceState == null) {
-            viewModel.load();
+            viewModel.load(sharedPreferences.getString("token", "none"));
 
         }
 
@@ -128,13 +131,7 @@ public class InventarizationFragment extends Fragment {
         binding.stopProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(String key:inventarizationItems.keySet()){
-                    for(Item item: inventarizationItems.get(key)){
-                        if(!item.isChecked()){
-                            checked_serial_numbers.put(item.getId(), false);
-                        }
-                    }
-                }
+                //TODO setchecked у предметов которые не были обнаружены
                 Navigation.findNavController(getView()).navigateUp();
                 Toast toast = Toast.makeText(getContext(), "Данные были сохранены", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.BOTTOM, 0, 100);
@@ -229,8 +226,8 @@ public class InventarizationFragment extends Fragment {
                 for(int i = 0; i < items.size();i++){
                     if(Objects.equals(items.get(i).getSerial_number(), intentResult.getContents())){
                         flag = false;
-                        items.get(i).setCheckedItem(true);
-                        checked_serial_numbers.put((Long) items.get(i).getId(), true);
+                        items.get(i).setCheckedItem(2);
+                        viewModel.update(items.get(i).getId(), items.get(i));
                         adapter_objects.setItems(items);
                     }
                 }

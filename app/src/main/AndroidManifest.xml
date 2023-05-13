@@ -27,7 +27,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.main.ui.MainActivity"
+            android:name=".feature.main_admin.ui.MainActivityAdmin"
+            android:exported="false"
+            android:theme="@style/NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".feature.main_user.ui.MainActivityUser"
             android:exported="false"
             android:theme="@style/NoActionBar">
 

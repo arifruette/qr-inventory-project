@@ -12,7 +12,7 @@ public class Item {
 
     private String obj_place_text;
     private String obj_place;
-    private boolean checked;
+    private int checked;
 
     public Item(long id, String name, String serial_number, String obj_place) {
         this.id = id;
@@ -49,11 +49,11 @@ public class Item {
         return obj_place_text;
     }
 
-    public boolean isChecked() {
+    public int getChecked(){
         return checked;
     }
 
-    public void setCheckedItem(boolean checked) {
+    public void setCheckedItem(int checked) {
         this.checked = checked;
     }
 

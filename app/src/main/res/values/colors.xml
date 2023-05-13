@@ -14,4 +14,5 @@
     <color name="button_gray">#BDBDBD</color>
     <color name="hint">#7E7E9A</color>
     <color name="menu_header">#EFEFEF</color>
+    <color name="green">#00ff00 </color>
 </resources>

@@ -1,5 +1,7 @@
 package com.example.qrinventarization.feature.items.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ public class ItemsFragment extends Fragment {
     private ItemAdapter adapter;
 
     private FragmentItemsBinding binding;
+    private SharedPreferences sharedPreferences;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,7 @@ public class ItemsFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(ItemsViewModel.class);
 
         binding = FragmentItemsBinding.inflate(inflater);
+        sharedPreferences = getContext().getSharedPreferences("mysettings", Context.MODE_PRIVATE);
         return binding.getRoot();
     }
 
@@ -49,7 +53,7 @@ public class ItemsFragment extends Fragment {
         binding.recycler.setAdapter(adapter);
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.items.observe(getViewLifecycleOwner(), this::renderItems);
-        viewModel.load();
+        viewModel.load(sharedPreferences.getString("token", "none"));
 
         binding.searchView.clearFocus();
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

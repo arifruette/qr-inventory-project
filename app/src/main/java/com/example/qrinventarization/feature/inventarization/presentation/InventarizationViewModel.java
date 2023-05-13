@@ -1,5 +1,7 @@
 package com.example.qrinventarization.feature.inventarization.presentation;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.qrinventarization.data.repository.ItemsRepository;
 import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.domain.model.items.Items;
+import com.example.qrinventarization.feature.object.presentation.ObjectStatus;
 
 import java.util.List;
 
@@ -23,9 +26,9 @@ public class InventarizationViewModel extends ViewModel {
     private MutableLiveData<List<Item>> _items = new MutableLiveData<>();
     public LiveData<List<Item>> items = _items;
 
-    public void load(){
+    public void load(String token){
         _status.setValue(InventarizationStatus.LOADING);
-        ItemsRepository.getItems().enqueue(new Callback<Items>() {
+        ItemsRepository.getItems(token).enqueue(new Callback<Items>() {
             @Override
             public void onResponse(@NonNull Call<Items> call, @NonNull Response<Items> response) {
                 _status.setValue(InventarizationStatus.LOADED);
@@ -35,6 +38,19 @@ public class InventarizationViewModel extends ViewModel {
             @Override
             public void onFailure(@NonNull Call<Items> call, @NonNull Throwable t) {
                 _status.setValue(InventarizationStatus.FAILURE);
+                t.printStackTrace();
+            }
+        });
+    }
+    public void update(long id, Item item){
+        ItemsRepository.updateObject(id, item).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                Log.d("INVENTARIZAION_RESPONSE", response.toString());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 t.printStackTrace();
             }
         });

@@ -9,13 +9,13 @@
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/imgStatus"
+        android:id="@+id/itemStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginBottom="5dp"
-        android:text="×"
-        android:textColor="@color/red"
+        android:text="\?"
+        android:textColor="@color/colorBlue_Figma"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         android:layout_marginStart="22dp"
         android:text="Название"
         android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="@id/imgStatus"
+        app:layout_constraintStart_toStartOf="@id/itemStatus"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

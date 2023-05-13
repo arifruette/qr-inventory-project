@@ -17,7 +17,8 @@ import com.example.qrinventarization.domain.model.users.Token;
 import com.example.qrinventarization.domain.model.users.User;
 import com.example.qrinventarization.feature.login.presentation.LoginPageStatus;
 import com.example.qrinventarization.feature.login.presentation.LoginViewModel;
-import com.example.qrinventarization.feature.main.ui.MainActivity;
+import com.example.qrinventarization.feature.main_admin.ui.MainActivityAdmin;
+import com.example.qrinventarization.feature.main_user.ui.MainActivityUser;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -31,14 +32,32 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sharedPreferences = getSharedPreferences("mysettings", MODE_PRIVATE);
+        if(sharedPreferences.contains("token") && sharedPreferences.contains("is_admin")){
+//
+//            if(sharedPreferences.getBoolean("is_admin", false)){
+//                Intent intent = new Intent(LoginPage.this, MainActivityAdmin.class);
+//                startActivity(intent);
+//            }else{
+//                Intent intent = new Intent(LoginPage.this, MainActivityUser.class);
+//                startActivity(intent);
+//            }
+            viewModel.status.observe(this, this::renderStatus);
+            viewModel.login(new User(sharedPreferences.getString("mail", "none"), sharedPreferences.getString("password", "none")));
+        }
+
         binding = ActivityLoginPageBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        setContentView(view);
 
-        sharedPreferences = getSharedPreferences("mysettings", MODE_PRIVATE);
+
+        if(!sharedPreferences.contains("is_admin")){
+            setContentView(view);
+        }
+
+
 
         binding.email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -120,12 +139,7 @@ public class LoginPage extends AppCompatActivity {
 
 
             case SUCCESS:
-                if(sharedPreferences.getBoolean("is_admin", false)){
-                    Intent intent = new Intent(LoginPage.this, MainActivity.class);
-                    startActivity(intent);
-                }else{
-                    //TODO new class for user
-                }
+                viewModel.token.observe(LoginPage.this, LoginPage.this::saveToken);
 
                 break;
         }
@@ -135,7 +149,17 @@ public class LoginPage extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("token", token.getAccess_token());
         editor.putBoolean("is_admin", token.isIs_admin());
+        editor.putString("mail", binding.email.getText().toString());
+        editor.putString("password", binding.password.getText().toString());
         editor.apply();
+
+        if(token.isIs_admin()){
+            Intent intent = new Intent(LoginPage.this, MainActivityAdmin.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(LoginPage.this, MainActivityUser.class);
+            startActivity(intent);
+        }
     }
 
 }
