@@ -72,7 +72,7 @@ public class ObjectFragment extends Fragment {
         binding.historyObject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(getView()).navigate(ObjectFragmentDirections.actionObjectToHistoryFragment());
+                Navigation.findNavController(getView()).navigate(ObjectFragmentDirections.actionObjectToHistoryFragment(args.getId()));
             }
         });
 

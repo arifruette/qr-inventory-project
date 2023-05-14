@@ -41,14 +41,6 @@ public class LoginPage extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         if(sharedPreferences.contains("token") && sharedPreferences.contains("is_admin")){
-//
-//            if(sharedPreferences.getBoolean("is_admin", false)){
-//                Intent intent = new Intent(LoginPage.this, MainActivityAdmin.class);
-//                startActivity(intent);
-//            }else{
-//                Intent intent = new Intent(LoginPage.this, MainActivityUser.class);
-//                startActivity(intent);
-//            }
             viewModel.status.observe(this, this::renderStatus);
             viewModel.login(new User(sharedPreferences.getString("mail", "none"), sharedPreferences.getString("password", "none")));
         }
@@ -134,9 +126,13 @@ public class LoginPage extends AppCompatActivity {
                 binding.loginTitle.setVisibility(View.INVISIBLE);
                 binding.loginSubtitle.setVisibility(View.INVISIBLE);
 
-                binding.loginFailed.setVisibility(View.VISIBLE);
-
                 binding.sendingProgressBar.setVisibility(View.INVISIBLE);
+
+                Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginPage.this, LoginPage.class);
+                startActivity(intent);
+
+
                 break;
 
 

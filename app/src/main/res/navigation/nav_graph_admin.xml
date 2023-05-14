@@ -53,5 +53,9 @@
         android:id="@+id/historyFragment"
         android:name="com.example.qrinventarization.feature.history.ui.HistoryFragment"
         android:label="HistoryFragment"
-        tools:layout="@layout/fragment_history"/>
+        tools:layout="@layout/fragment_history">
+        <argument android:name="id"
+            app:argType="long"
+            app:nullable="false"/>
+    </fragment>
 </navigation>
