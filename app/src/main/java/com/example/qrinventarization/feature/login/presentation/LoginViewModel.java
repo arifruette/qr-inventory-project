@@ -1,6 +1,7 @@
 package com.example.qrinventarization.feature.login.presentation;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -32,6 +33,7 @@ public class LoginViewModel extends ViewModel {
                 _status.setValue(LoginPageStatus.SUCCESS);
 //                System.out.println(response.body().getAccess_token());
                 _token.setValue(response.body());
+//                Log.d("TAGG", response.body().getAccess_token() + " " + response.body().isIs_admin());
             }
 
             @Override

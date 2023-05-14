@@ -23,12 +23,16 @@ public class HistoryFragment extends Fragment {
     private FragmentHistoryBinding binding;
     private HistoryViewModel viewModel;
     private HistoryAdapter adapter;
+    private HistoryFragmentArgs args;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentHistoryBinding.inflate(inflater);
         viewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
+
+        args = HistoryFragmentArgs.fromBundle(requireArguments());
+
         return binding.getRoot();
     }
 
@@ -42,7 +46,7 @@ public class HistoryFragment extends Fragment {
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.histories.observe(getViewLifecycleOwner(), this::renderData);
 
-        viewModel.history();
+        viewModel.history(args.getId());
 
         binding.buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override

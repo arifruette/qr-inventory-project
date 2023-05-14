@@ -21,7 +21,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     public void bind(Item item) {
         binding.testItemName.setText(item.getName());
         binding.testItemNumber.setText(item.getSerial_number());
-        System.out.println(item.getChecked());
         switch (item.getChecked()) {
             case 1:
                 binding.itemStatus.setText("×");

@@ -22,5 +22,7 @@ public class HistoryViewHolder extends RecyclerView.ViewHolder {
     public void bind(History history){
         binding.date.setText(history.getDate());
         //TODO надо поменять апишку у истории
+        binding.newPlace.setText(history.getNew_place());
+        binding.oldPlace.setText(history.getOld_place());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.qrinventarization.feature.object.ui;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,6 +50,9 @@ public class ObjectFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.imageButton.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigateUp());
+
+        viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
+        viewModel.hasImage(args.getId());
 
         viewModel.status.observe(getViewLifecycleOwner(), this::renderStatus);
         viewModel.item.observe(getViewLifecycleOwner(), this::renderItem);
@@ -230,13 +234,15 @@ public class ObjectFragment extends Fragment {
                 binding.closeButton.setVisibility(View.INVISIBLE);
                 binding.delete.setVisibility(View.INVISIBLE);
                 break;
+            case YES:
+                viewModel.bitmap.observe(getViewLifecycleOwner(), this::setImage);
+                viewModel.getImage(args.getId());
         }
     }
 
     private void renderItem(Item item) {
         binding.objectName.setText(item.getName());
         binding.objectNumber.setText(item.getSerial_number());
-        System.out.println(item.getPlace());
         if (!Objects.equals(item.getPlace(), "None")) {
             binding.objectPlace.setText(item.getPlace());
         } else {
@@ -258,6 +264,10 @@ public class ObjectFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinner.setPrompt("Выберите помещение");
         binding.spinner.setAdapter(adapter);
+    }
+
+    private void setImage(Bitmap bitmap){
+        binding.image.setImageBitmap(bitmap);
     }
 
     @Override

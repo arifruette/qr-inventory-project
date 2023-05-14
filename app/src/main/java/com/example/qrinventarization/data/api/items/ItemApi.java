@@ -1,9 +1,11 @@
 package com.example.qrinventarization.data.api.items;
 
+import com.example.qrinventarization.domain.model.items.HasImage;
 import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.domain.model.items.Items;
 import com.example.qrinventarization.domain.model.items.Object;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -41,4 +43,10 @@ public interface ItemApi {
 
     @POST("objects")
     Call<Void> addObject(@Body Item item);
+
+    @GET("objects/image/{id}")
+    Call<ResponseBody> getImage(@Path("id") long id);
+
+    @GET("objects/has_image/{id}")
+    Call<HasImage> hasImage(@Path("id") long id);
 }

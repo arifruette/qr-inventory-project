@@ -33,6 +33,13 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         sharedPreferences = getSharedPreferences("mysettings", MODE_PRIVATE);
+
+
+        binding = ActivityLoginPageBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
         if(sharedPreferences.contains("token") && sharedPreferences.contains("is_admin")){
 //
 //            if(sharedPreferences.getBoolean("is_admin", false)){
@@ -45,11 +52,6 @@ public class LoginPage extends AppCompatActivity {
             viewModel.status.observe(this, this::renderStatus);
             viewModel.login(new User(sharedPreferences.getString("mail", "none"), sharedPreferences.getString("password", "none")));
         }
-
-        binding = ActivityLoginPageBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-
-        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
 
 
@@ -147,10 +149,13 @@ public class LoginPage extends AppCompatActivity {
 
     private void saveToken(Token token){
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
         editor.putString("token", token.getAccess_token());
         editor.putBoolean("is_admin", token.isIs_admin());
-        editor.putString("mail", binding.email.getText().toString());
-        editor.putString("password", binding.password.getText().toString());
+        if(!sharedPreferences.contains("mail")){
+            editor.putString("mail", binding.email.getText().toString());
+            editor.putString("password", binding.password.getText().toString());
+        }
         editor.apply();
 
         if(token.isIs_admin()){
@@ -162,4 +167,9 @@ public class LoginPage extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        binding = null;
+    }
 }

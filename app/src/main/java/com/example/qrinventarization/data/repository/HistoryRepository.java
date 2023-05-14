@@ -7,6 +7,6 @@ import com.example.qrinventarization.domain.model.history.Histories;
 import retrofit2.Call;
 
 public class HistoryRepository {
-    public static Call<Histories> getHistory(){return HistoryApiService.getInstance().getHistory();}
+    public static Call<Histories> getHistory(long id){return HistoryApiService.getInstance().getHistory(id);}
 
 }

@@ -7,5 +7,7 @@ public enum ObjectStatus {
     DELETED,
     LOADED_PLACES,
     FAILURE_PLACES,
-    LOADING_PLACES
+    LOADING_PLACES,
+    YES,
+    NO
 }

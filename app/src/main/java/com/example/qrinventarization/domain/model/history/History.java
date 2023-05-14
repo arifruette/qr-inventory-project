@@ -3,9 +3,9 @@ package com.example.qrinventarization.domain.model.history;
 public class History {
     private String date;
     private long id;
-    private long new_place_id;
+    private String new_place;
     private long obj_id;
-    private long obj_place_id;
+    private String old_place;
 
     public String getDate() {
         return date;
@@ -23,27 +23,12 @@ public class History {
         this.id = id;
     }
 
-    public long getNew_place_id() {
-        return new_place_id;
+    public String getNew_place() {
+        return new_place;
+    }
+    public String getOld_place(){
+        return old_place;
     }
 
-    public void setNew_place_id(long new_place_id) {
-        this.new_place_id = new_place_id;
-    }
 
-    public long getObj_id() {
-        return obj_id;
-    }
-
-    public void setObj_id(long obj_id) {
-        this.obj_id = obj_id;
-    }
-
-    public long getObj_place_id() {
-        return obj_place_id;
-    }
-
-    public void setObj_place_id(long obj_place_id) {
-        this.obj_place_id = obj_place_id;
-    }
 }

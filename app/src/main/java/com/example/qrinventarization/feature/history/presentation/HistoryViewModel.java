@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.qrinventarization.data.repository.HistoryRepository;
 import com.example.qrinventarization.domain.model.history.Histories;
 import com.example.qrinventarization.domain.model.history.History;
-import com.example.qrinventarization.feature.object.presentation.ObjectStatus;
 
 import java.util.List;
 
@@ -28,9 +27,9 @@ public class HistoryViewModel extends ViewModel {
 
 
 
-    public void history(){
+    public void history(long id){
         _status.setValue(HistoryStatus.LOADING);
-        HistoryRepository.getHistory().enqueue(new Callback<Histories>() {
+        HistoryRepository.getHistory(id).enqueue(new Callback<Histories>() {
             @Override
             public void onResponse(@NonNull Call<Histories> call, @NonNull Response<Histories> response) {
                 _status.setValue(HistoryStatus.LOADED);

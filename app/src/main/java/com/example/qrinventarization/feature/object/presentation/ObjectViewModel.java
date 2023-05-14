@@ -1,15 +1,16 @@
 package com.example.qrinventarization.feature.object.presentation;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.qrinventarization.data.repository.HistoryRepository;
 import com.example.qrinventarization.data.repository.ItemsRepository;
 import com.example.qrinventarization.data.repository.PlacesRepository;
-import com.example.qrinventarization.domain.model.history.Histories;
-import com.example.qrinventarization.domain.model.history.History;
+import com.example.qrinventarization.domain.model.items.HasImage;
 import com.example.qrinventarization.domain.model.items.Item;
 import com.example.qrinventarization.domain.model.items.Object;
 import com.example.qrinventarization.domain.model.places.Place;
@@ -17,6 +18,7 @@ import com.example.qrinventarization.domain.model.places.Places;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,8 +30,12 @@ public class ObjectViewModel extends ViewModel {
 
     private MutableLiveData<ObjectStatus> _status = new MutableLiveData<>();
     public LiveData<ObjectStatus> status = _status;
+
     private MutableLiveData<List<Place>> _places = new MutableLiveData<>();
     public LiveData<List<Place>> places = _places;
+
+    private MutableLiveData<Bitmap> _bitmap = new MutableLiveData<>();
+    public LiveData<Bitmap> bitmap = _bitmap;
 
     public void set_status(ObjectStatus status){
         _status.setValue(status);
@@ -95,6 +101,39 @@ public class ObjectViewModel extends ViewModel {
             public void onFailure(@NonNull Call<Places> call, @NonNull Throwable t) {
                 _status.setValue(ObjectStatus.FAILURE_PLACES);
                 t.printStackTrace();
+            }
+        });
+    }
+
+    public void hasImage(long id){
+        ItemsRepository.hasImage(id).enqueue(new Callback<HasImage>() {
+            @Override
+            public void onResponse(@NonNull Call<HasImage> call, @NonNull Response<HasImage> response) {
+                if(response.body().isHas_image()){
+                    _status.setValue(ObjectStatus.YES);
+                }else{
+                    _status.setValue(ObjectStatus.NO);
+                }
+                System.out.println(response);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<HasImage> call, @NonNull Throwable t) {
+            }
+        });
+    }
+
+    public void getImage(long id){
+        ItemsRepository.getImage(id).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
+                _bitmap.setValue(bmp);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
     }
