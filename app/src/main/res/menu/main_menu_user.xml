@@ -18,7 +18,7 @@
         <item android:title="Другое">
             <menu>
                 <item
-                    android:id="@+id/logout"
+                    android:id="@+id/logoutFragment"
                     android:icon="@drawable/ic_baseline_logout_24"
                     android:title="Выйти" />
             </menu>

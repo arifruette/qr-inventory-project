@@ -19,4 +19,15 @@
 
     </group>
 
+    <group>
+        <item android:title="Другое">
+            <menu>
+                <item
+                    android:id="@+id/logoutFragment"
+                    android:icon="@drawable/ic_baseline_logout_24"
+                    android:title="Выйти" />
+            </menu>
+        </item>
+    </group>
+
 </menu>

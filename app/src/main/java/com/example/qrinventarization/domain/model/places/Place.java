@@ -2,13 +2,13 @@ package com.example.qrinventarization.domain.model.places;
 
 public class Place {
     private String id;
-    private Object text;
+    private String text;
 
     public String getId() {
         return id;
     }
 
-    public Object getText() {
+    public String getText() {
         return text;
     }
 

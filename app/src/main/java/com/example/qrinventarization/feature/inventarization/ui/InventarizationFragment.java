@@ -145,10 +145,12 @@ public class InventarizationFragment extends Fragment {
         inventarizationItems = new HashMap<>();
 
         for(int i =0;i < itemsList.size();i++){
-
+            System.out.print(itemsList.get(i).getPlace());
+            System.out.println(args.getLocations());
             if(!itemsList.get(i).getPlace().equals("None")){
-                String place = itemsList.get(i).getPlace().replace(".0", "");
-                if(Arrays.asList(args.getLocations().split(" ")).contains(place)){
+                String place = itemsList.get(i).getPlace();
+                //String place = itemsList.get(i).getPlace().replace(".0", "");
+                if(Arrays.asList(args.getLocations().split("&")).contains(place)){
                     if(inventarizationItems.containsKey(place)){
                         ArrayList<Item> final_list = inventarizationItems.get(place);
                         final_list.add(itemsList.get(i));
@@ -161,7 +163,6 @@ public class InventarizationFragment extends Fragment {
                 }
             }
         }
-        System.out.println(inventarizationItems);
         locations = new ArrayList<>();
         locations.addAll(inventarizationItems.keySet());
 
@@ -169,7 +170,7 @@ public class InventarizationFragment extends Fragment {
         binding.locationsSpinner.setPrompt("Выберите помещение");
         binding.locationsSpinner.setAdapter(adapter);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //System.out.println(inventarizationItems.toString());
+        System.out.println(inventarizationItems.toString());
     }
 
     private void renderStatus(InventarizationStatus status){

@@ -62,9 +62,12 @@ public class PlacesFragment extends Fragment {
                     checked.add(post);
                 }
             }
+            StringBuilder result = new StringBuilder();
+            for(String elem: checked){
+                result.append("&").append(elem);
+            }
 
-            Navigation.findNavController(binding.getRoot()).navigate(PlacesFragmentDirections.actionPlacesFragmentToInventarizationFragment(String.join(" ", checked)));
-            //System.out.println(checked.toString());
+            Navigation.findNavController(binding.getRoot()).navigate(PlacesFragmentDirections.actionPlacesFragmentToInventarizationFragment(result.toString()));
         });
     }
 
@@ -95,7 +98,7 @@ public class PlacesFragment extends Fragment {
     private void setAdapter(@NonNull List<Place> lst){
         ArrayList<String> places = new ArrayList<>();
         for(int i =0;i<lst.size();i++){
-            places.add(lst.get(i).getText().toString().replace(".0", ""));
+            places.add(lst.get(i).getText().toString());
         }
         locations_adapter = new ArrayAdapter<String>
                 (getContext(), android.R.layout.simple_list_item_multiple_choice, places);
