@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +21,10 @@
         android:id="@+id/loginFailed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/blue_curve"
         android:text="Failed to login"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,34 +36,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="104dp"
+        android:layout_marginEnd="150dp"
         android:fontFamily="@font/sego_ui_regular"
         android:text="Добро пожаловать!"
         android:textColor="@color/main_color"
-        android:textSize="24sp"
+        android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/loginSubtitle"
-        android:layout_width="335dp"
-        android:layout_height="40dp"
+        android:layout_width="526dp"
+        android:layout_height="210dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/sego_ui_regular"
         android:text="Войдите, чтобы начать пользоваться функциями приложения"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/loginTitle"
         app:layout_constraintTop_toBottomOf="@+id/loginTitle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="335dp"
-        android:layout_height="72dp"
+        android:layout_width="526dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="@+id/loginSubtitle"
         app:layout_constraintStart_toStartOf="@+id/loginSubtitle"
         app:layout_constraintTop_toBottomOf="@+id/loginSubtitle">
 
@@ -71,31 +74,33 @@
             android:fontFamily="@font/sego_ui_regular"
             android:text="Вход по E-mail"
             android:textColor="@color/hint"
+            android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="70dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/sego_ui_regular"
             android:hint="Введите e-mail:"
             android:inputType="textEmailAddress"
             android:padding="14dp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailHint" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="335dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/loginSubtitle"
+        android:layout_width="526dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="@+id/loginSubtitle"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <TextView
             android:id="@+id/passwordHint"
@@ -104,28 +109,32 @@
             android:fontFamily="@font/sego_ui_regular"
             android:text="Пароль"
             android:textColor="@color/hint"
+            android:textSize="17sp"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="70dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/edit_text"
             android:fontFamily="@font/sego_ui_regular"
             android:hint="Введите пароль:"
             android:inputType="textEmailAddress"
             android:padding="14dp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordHint" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_page_button"
-        android:layout_width="335dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="526dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="70dp"
         android:background="@drawable/login_page_button"
         android:enabled="false"
         android:fontFamily="@font/sego_ui_regular"
@@ -134,11 +143,9 @@
         android:text="Далее"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:translationY="-1.86sp"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
