@@ -24,6 +24,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/sego_ui_regular"
+        android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -34,7 +36,8 @@
         android:layout_marginTop="31dp"
         android:text="Процесс инвентаризации"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="37sp"
+        android:fontFamily="@font/sego_ui_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,8 +57,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rV"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="500dp"
+        android:layout_height="600dp"
         android:layout_marginTop="40dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,28 +68,30 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/scan"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/button"
         android:text="Сканировать"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:fontFamily="@font/sego_ui_regular"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rV" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/stopProcess"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button"
         android:text="Завершить процесс"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:fontFamily="@font/sego_ui_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scan" />

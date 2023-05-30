@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".feature.places.ui.PlacesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/locationsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:fontFamily="@font/sego_ui_regular"
         android:text="Локации"
         android:textColor="@color/forTitle"
         android:textSize="37sp"
-        android:fontFamily="@font/sego_ui_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,9 +22,9 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="400dp"
-        android:layout_height="500dp"
-        android:layout_marginTop="40dp"
-        android:background="@color/gray"
+        android:layout_height="600dp"
+        android:layout_marginTop="80dp"
+        android:background="#d3d3d3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationsTitle" />
@@ -45,25 +44,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Error while parsing places"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:fontFamily="@font/sego_ui_regular"
+        android:text="Error while parsing places"
         android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/startInventarization"
-        android:layout_width="400dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="500dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/button"
+        android:fontFamily="@font/sego_ui_regular"
         android:text="Запустить инвентаризацию"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/listView" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

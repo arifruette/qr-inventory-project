@@ -3,6 +3,7 @@ package com.example.qrinventarization.feature.main_admin.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -71,4 +72,5 @@ public class MainActivityAdmin extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 }
