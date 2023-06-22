@@ -1,5 +1,6 @@
 package com.example.qrinventarization.feature.login.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class LoginPage extends AppCompatActivity {
     private ActivityLoginPageBinding binding;
     private boolean email_correct = false;
     private boolean password_correct = false;
+    private static Context appContext;
     private LoginViewModel viewModel;
     private SharedPreferences sharedPreferences;
 
@@ -32,6 +34,7 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        appContext = getApplicationContext();
         sharedPreferences = getSharedPreferences("mysettings", MODE_PRIVATE);
 
 
@@ -70,6 +73,7 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
+
 
 
         binding.password.addTextChangedListener(new TextWatcher() {
@@ -141,6 +145,9 @@ public class LoginPage extends AppCompatActivity {
 
                 break;
         }
+    }
+    public static Context getAppContext(){
+        return appContext;
     }
 
     private void saveToken(Token token){

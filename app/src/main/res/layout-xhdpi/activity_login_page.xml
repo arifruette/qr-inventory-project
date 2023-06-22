@@ -142,5 +142,4 @@
         app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
